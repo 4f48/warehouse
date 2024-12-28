@@ -6,18 +6,31 @@
 	<body>
 		<form enctype="multipart/form-data" id="upload">
 			<input type="file" name="file" />
-			<button type="submit">Upload</button>
+			<button id="submit" type="submit">Upload</button>
+			<p id="response"></p>
 		</form>
 		<script>
 			let form = document.getElementById("upload");
+			let submitButton = document.getElementById("submit");
 			form.addEventListener("submit", async (event) => {
 				event.preventDefault();
+				
+				submitButton.style.cursor = "wait";
+				submitButton.disabled = true;
+
 				const formData = new FormData(form);
 				let response = await fetch("http://0.0.0.0:8000/upload", {
 					method: "POST",
 					body: formData,
+				}).then(async (response) => {
+					submitButton.style.cursor = "default";
+					submitButton.disabled = false;
+
+					let responseField = document.getElementById("response");
+					responseField.innerText = await response.text();
 				});
-				console.debug(response.status);
+
+
 			});
 		</script>
 	</body>

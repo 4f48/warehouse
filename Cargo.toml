@@ -5,4 +5,9 @@ edition = "2021"
 
 [dependencies]
 axum = { version = "0.7.9", features = ["multipart", "http2"] }
-tokio = {  version = "1.42.0", features = ["macros", "rt-multi-thread"] }
+base64 = "0.22.1"
+blake3 = "1.5.5"
+rand = "0.8.5"
+tokio = {  version = "1.42.0", features = ["macros", "rt-multi-thread", "signal"] }
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
