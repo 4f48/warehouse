@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>warehouse</title>
+    <link rel="icon" type="svg+xml" href="/artifacts/favicon.svg" />
+    <link rel="stylesheet" href="/artifacts/style.css">
+  </head>
+  <body>
+    <header>
+      <button id="key">warehouse</button>
+      <button id="upload">Upload</button>
+      <button id="download">Download</button>
+      <button id="delete">Delete</button>
+    </header>
+    <main class="active" id="key">
+      <form class="key" id="key">
+        <label for="key" title="base64 encoded secret key found in objects/.key"
+          >Secret key</label
+        >
+        <input name="key" id="key" placeholder="SSBsb3ZlIHlvdSA8Mw..." />
+        <button type="submit">Save</button>
+        <p id="keyError"></p>
+      </form>
+    </main>
+    <main id="upload">
+      <form class="upload" enctype="multipart/form-data" id="upload">
+        <input id="file" name="file" required type="file" />
+        <label for="file" id="drop">
+          <div class="contents">
+            <span>Drop file here or</span>
+            <span class="button">choose file</span>
+          </div>
+          <div class="filename">
+            <p id="filename">h</p>
+          </div>
+        </label>
+        <button id="submit" type="submit">Upload</button>
+        <p class="response" id="response"></p>
+      </form>
+    </main>
+    <main id="download">
+      <form class="download" id="download">
+        <label for="hash" title="BLAKE3 hash of the file contents"
+          >File hash</label
+        >
+        <input name="hash" id="hash" placeholder="SSBsb3ZlIHlvdSA8Mw..." />
+        <button type="submit">Download</button>
+        <p id="downloadError"></p>
+      </form>
+    </main>
+    <main id="delete">
+      <form class="delete" id="delete">
+        <label for="hash" title="BLAKE3 hash of the file contents"
+          >File hash</label
+        >
+        <input name="hash" id="hash" placeholder="SSBsb3ZlIHlvdSA8Mw..." />
+        <button type="submit">Delete</button>
+        <p id="deleteError"></p>
+      </form>
+    </main>
+    <script src="/artifacts/index.js"></script>
+  </body>
+</html>

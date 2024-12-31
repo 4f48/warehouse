@@ -2,14 +2,27 @@ use std::io::ErrorKind;
 
 use axum::{
     extract::{Path, State},
-    http::StatusCode,
+    http::{HeaderMap, StatusCode},
 };
 use tracing::{debug, error};
 
+use crate::authenticate;
+
 pub(crate) async fn delete(
     Path(file): Path<String>,
+    headers: HeaderMap,
     State(state): State<crate::State>,
 ) -> Result<(), StatusCode> {
+    match authenticate(headers, state.key) {
+        Ok(result) => match result {
+            true => (),
+            false => return Err(StatusCode::UNAUTHORIZED),
+        },
+        Err(error) => {
+            error!("{error}");
+            return Err(StatusCode::INTERNAL_SERVER_ERROR);
+        }
+    };
     match state.database.remove(&file) {
         Ok(_) => (),
         Err(error) => {

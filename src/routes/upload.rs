@@ -1,17 +1,31 @@
 use axum::{
     extract::{Multipart, State},
-    http::StatusCode,
+    http::{HeaderMap, StatusCode},
 };
 use tracing::{debug, error};
 
+use crate::authenticate;
+
 pub(crate) async fn upload(
     State(state): State<crate::State>,
+    headers: HeaderMap,
     mut multipart: Multipart,
 ) -> Result<String, StatusCode> {
     let field = match multipart.next_field().await {
         Ok(field) => match field {
             Some(field) => field,
             None => return Err(StatusCode::BAD_REQUEST),
+        },
+        Err(error) => {
+            error!("{error}");
+            return Err(StatusCode::INTERNAL_SERVER_ERROR);
+        }
+    };
+
+    match authenticate(headers, state.key) {
+        Ok(result) => match result {
+            true => (),
+            false => return Err(StatusCode::UNAUTHORIZED),
         },
         Err(error) => {
             error!("{error}");

@@ -1,14 +1,28 @@
 use axum::{
     extract::{Path, State},
-    http::{header, StatusCode},
+    http::{header, HeaderMap, StatusCode},
     response::Response,
 };
 use tracing::{debug, error};
 
+use crate::authenticate;
+
 pub(crate) async fn get(
     Path(file): Path<String>,
+    headers: HeaderMap,
     State(state): State<crate::State>,
 ) -> Result<Response, StatusCode> {
+    match authenticate(headers, state.key) {
+        Ok(result) => match result {
+            true => (),
+            false => return Err(StatusCode::UNAUTHORIZED),
+        },
+        Err(error) => {
+            error!("{error}");
+            return Err(StatusCode::INTERNAL_SERVER_ERROR);
+        }
+    };
+
     let file_name = match state.database.get(&file) {
         Ok(file_name) => match file_name {
             Some(file_name) => match String::from_utf8(file_name.to_vec()) {
