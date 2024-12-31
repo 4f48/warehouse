@@ -2,7 +2,7 @@ mod routes;
 
 use axum::{
     extract::DefaultBodyLimit,
-    routing::{get, post},
+    routing::{delete, get, post},
     Router,
 };
 use base64::{engine::general_purpose::STANDARD_NO_PAD, Engine};
@@ -11,6 +11,11 @@ use tokio::signal;
 use tracing::{debug, info, Level};
 use tracing_subscriber::FmtSubscriber;
 
+#[derive(Clone)]
+struct State {
+    database: sled::Db,
+}
+
 #[tokio::main]
 async fn main() {
     let subscriber = FmtSubscriber::builder()
@@ -18,15 +23,20 @@ async fn main() {
         .finish();
     tracing::subscriber::set_global_default(subscriber).unwrap();
 
+    let db: sled::Db = sled::open("store").unwrap();
+    let state = State { database: db };
+
     init_storage();
 
     let app = Router::new()
         .route("/", get(routes::test::test))
-        .route("/get/:file", get(routes::get::get))
+        .route("/:file", get(routes::get::get))
+        .route("/:file", delete(routes::delete::delete))
         .route(
-            "/upload",
+            "/",
             post(routes::upload::upload).layer(DefaultBodyLimit::disable()),
-        );
+        )
+        .with_state(state);
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
