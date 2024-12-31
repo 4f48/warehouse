@@ -1,16 +1,33 @@
+<!--
+  Copyright (C) 2024 Oliver Pirger <0x4f48@proton.me>
+
+  This file is part of Warehouse.
+
+  Warehouse is free software: you can redistribute it and/or modify it under the terms of
+  the GNU Affero General Public License as published by the Free Software Foundation,
+  version 3 of the License only.
+
+  Warehouse is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Affero General Public License for more details.
+
+  You should have received a copy of the GNU Affero General Public License
+  along with Warehouse. If not, see <https://www.gnu.org/licenses/>.
+-->
+
 <!doctype html>
 <html lang="en">
   <head>
     <title>warehouse</title>
     <link rel="icon" type="svg+xml" href="/artifacts/favicon.svg" />
-    <link rel="stylesheet" href="/artifacts/style.css">
+    <link rel="stylesheet" href="/artifacts/style.css" />
   </head>
   <body>
     <header>
       <button id="key">warehouse</button>
-      <button id="upload">Upload</button>
-      <button id="download">Download</button>
-      <button id="delete">Delete</button>
+      <button id="upload">upload</button>
+      <button id="download">download</button>
+      <button id="delete">delete</button>
     </header>
     <main class="active" id="key">
       <form class="key" id="key">
@@ -20,6 +37,12 @@
         <input name="key" id="key" placeholder="SSBsb3ZlIHlvdSA8Mw..." />
         <button type="submit">Save</button>
         <p id="keyError"></p>
+        <a
+          class="source"
+          target="_blank"
+          href="https://github.com/4f48/warehouse"
+          >Source code</a
+        >
       </form>
     </main>
     <main id="upload">

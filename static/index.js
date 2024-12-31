@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2024 Oliver Pirger <0x4f48@proton.me>
+ *
+ * This file is part of Warehouse.
+ *
+ * Warehouse is free software: you can redistribute it and/or modify it under the terms of
+ * the GNU Affero General Public License as published by the Free Software Foundation,
+ * version 3 of the License only.
+ *
+ * Warehouse is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Warehouse. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 let key = "";
 const value = `; ${document.cookie}`;
 const parts = value.split(`; key=`);
