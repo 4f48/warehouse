@@ -7,7 +7,6 @@ description = "A lightweight object storage database"
 readme = "README.md"
 repository = "https://github.com/4f48/warehouse"
 license = "AGPL-3.0-only"
-license-file = "COPYING.md"
 keywords = ["database", "storage", "object-storage"]
 categories = ["database-implementations"]
 

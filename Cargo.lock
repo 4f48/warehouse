@@ -700,6 +700,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "object-warehouse"
+version = "1.0.1"
+dependencies = [
+ "axum",
+ "base64",
+ "blake3",
+ "clap",
+ "rand",
+ "rust-embed",
+ "sled",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "once_cell"
 version = "1.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1221,22 +1237,6 @@ checksum = "29790946404f91d9c5d06f9874efddea1dc06c5efe94541a7d6863108e3a5e4b"
 dependencies = [
  "same-file",
  "winapi-util",
-]
-
-[[package]]
-name = "warehouse"
-version = "1.0.0"
-dependencies = [
- "axum",
- "base64",
- "blake3",
- "clap",
- "rand",
- "rust-embed",
- "sled",
- "tokio",
- "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]
