@@ -1,7 +1,15 @@
 [package]
-name = "warehouse"
-version = "1.0.0"
+name = "object-warehouse"
+version = "1.0.1"
+authors = ["Oliver Pirger <0x4f48@proton.me>"]
 edition = "2021"
+description = "A lightweight object storage database"
+readme = "README.md"
+repository = "https://github.com/4f48/warehouse"
+license = "AGPL-3.0-only"
+license-file = "COPYING.md"
+keywords = ["database", "storage", "object-storage"]
+categories = ["database-implementations"]
 
 [dependencies]
 axum = { version = "0.7.9", features = ["multipart", "http2"] }
